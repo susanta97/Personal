@@ -1,0 +1,46 @@
+    <button hidden="true" type="button" id="login" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          Singup
+    </button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document" >
+      <form  id="login-form" method="post" >
+          {% csrf_token %}
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" >Login</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span class="fa fa-times-circle" style="font-size: 30px ; color: #FC0101 "></span>
+            </button>
+          </div>
+
+
+      <div class="modal-body">
+          <div class="form-group">
+            <label for="username" style="font-size: 20px">
+              <span class="fa fa-user" style="font-size: 20px ; color: blue"></span> <span class=""></span>Email
+            </label>
+            <input type="text" name="username" class="form-control" id="username">
+
+            <label for="password" style="font-size: 20px" >
+             <span class="fa fa-lock" style="font-size: 20px ; color: blue" ></span> <span class=""></span>Password</label>
+            <input type="password" name="password" id="password" class="form-control">
+          </div>
+      </div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: white ; color: red">
+           <span class="fa fa-user" style="color: red ; font-size: 20px; background-color: white"></span>Close
+
+        </button>
+        <button  type="submit" class="btn btn-primary" style="background-color: green">
+{#          <span class="fa fa-sign-out" style="font-size: 20px ; color: white"></span>#}
+            <span class="material-icons" style="font-size: 20px ; color: white">login</span>
+        Login</button>
+      </div>
+        </div>
+      </form>
+  </div>
+
+</div>

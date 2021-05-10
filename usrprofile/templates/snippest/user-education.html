@@ -1,0 +1,41 @@
+<div class="card mt-5">
+
+    <div class="row">
+        <h5 style="margin-right: 10px">Name:</h5> <h5>{{ profile.First_name}} {{ profile.Last_name }}</h5>
+     </div>
+     <div class="row">
+         <h5 style="margin-right: 10px">Email:</h5> <h5>{{ profile.email}}</h5>
+      </div>
+    <div class="row">
+     <h6 style="margin-right: 10px">Contact:</h6> <h6>{{ profile.contact}}</h6>
+    </div>
+<div class="row">
+	<h3 class="font-weight-bold sideline mb-3">Education</h3>
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">CLASS</th>
+      <th scope="col">BOARD/UNIVERSITY</th>
+      <th scope="col">YEAR</th>
+        <th scope="col">DIVISION/PERCENTAGE</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for edu in education %}
+      <tr>
+       <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ edu.board_class }}</td>
+        <td>{{ edu.board_name }}</td>
+        <td>{{ edu.year }}</td>
+        <td>{{ edu.percentage }}</td>
+      </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+
+</div>

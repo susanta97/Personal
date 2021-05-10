@@ -1,0 +1,250 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">  <!-- Font awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300i,400,700&amp;display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplebar/4.2.3/simplebar.css">
+
+    <link rel="stylesheet" href="{% static 'usr_profile_style.css' %}">
+
+</head>
+<body style="overflow: auto;height: 100% ; margin-top: 20px">
+
+
+
+<section class="wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-sm-12 col-md-5 col-lg-3 text-white sidebar background-blue">
+				<div class="col-md-12 mx-auto">
+                <a  class="font-weight-bold text-white" href="{% url 'home:home' %}" style="font-size: 20px ;"><i class="fas fa-home"></i></a>
+
+
+{#					<figure class="profile-image mx-auto hover-overlay">#}
+{##}
+{#						<img class="img-fluid rounded-circle"#}
+{#							src="{{ request.user.profile_image.url  }}"#}
+{#							alt="Profile photo">#}
+{#						<figcaption class="text-center"><small class="d-block">Filip</small>Rastovic</figcaption>#}
+{#					</figure>#}
+        {% ifequal flag 0 %}
+
+          <div class="form-group text-center" style="position: relative;">
+         <span class="img-div">
+              <img src="{{ profile_image }}"  id="profileDisplay">
+         </span>
+        </div>
+
+        {% endifequal %}
+
+        {% ifequal flag 1 %}
+            {% if request.user.is_authenticated %}
+             <div class="form-group text-center" style="position: relative;">
+             <span class="img-div">
+                <a href="{% url 'account:edit' user_id=user_id %}">
+    {#             <a href="{% url 'user-profile:base-edit'%}">#}
+                   <div class="text-center img-placeholder "  onClick="triggerClick()">
+                    <h4>{{ request.user.username }}</h4>
+                  </div>
+                  <img src="{{ profile_image }}" onClick="triggerClick()" id="profileDisplay">
+                </a>
+             </span>
+            </div>
+            {% endif %}
+
+        {% endifequal %}
+
+
+
+					<ul class="list-unstyled main-menu mt-5">
+						<li><a id="about" class="font-weight-bold text-white usrabout" href="#about-me"><i class="fa fa-user-tie "></i>About
+								Me</a></li>
+						<li><a id="user-education" class="font-weight-bold text-white" href="#education"><i class="fa fa-user-tie "></i>Education
+								</a></li>
+
+						<li><a id="user-expreience" class="font-weight-bold text-white" href="#experience"><i
+									class="fas fa-book"></i>Experience</a></li>
+						<li><a id="user-portfolio" class="font-weight-bold text-white" href="#portfolio"><i
+									class="fas fa-toolbox"></i>Project</a></li>
+						<li><a id="user-contact" class="font-weight-bold text-white" href="#contact"><i
+									class="far fa-envelope"></i>Contact</a></li>
+					</ul>
+					<ul class="list-unstyled list-inline mt-3 text-center">
+						<li class="list-inline-item"><a class="text-white" href="#"><i
+									class="fab fa-facebook-f"></i></a></li>
+						<li class="list-inline-item"><a class="text-white" href="#"><i class="fab fa-instagram"></i></a>
+						</li>
+						<li class="list-inline-item"><a class="text-white" href="#"><i
+									class="fab fa-linkedin-in"></i></a></li>
+						<li class="list-inline-item"><a class="text-white" href="#"><i class="fab fa-twitter"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+        <!-- user about-->
+
+        <div id="about-me" data-simplebar class="col-12 col-sm-12 col-md-7 col-lg-9 content about-me active">
+        </div>
+
+        <!-- user education -->
+
+        <div id="education" data-simplebar class="col-12 col-sm-12 col-md-7 col-lg-9 content education">
+        </div>
+
+
+         <!--user expreience -->
+         <div id="experience" data-simplebar class="container col-12 col-sm-12 col-md-7 col-lg-9 content experience" style="overflow: scroll;max-height: 100%;">
+         </div>
+
+        <!-- user protfolio-->
+        <div id="portfolio" data-simplebar class="col-12 col-sm-12 col-md-7 col-lg-9 content portfolio text-center">
+        </div>
+
+        <!--user contact --->
+         <div id="contact" data-simplebar class="col-12 col-sm-12 col-md-7 col-lg-9 content contact">
+         </div>
+
+
+          <div id="profile" data-simplebar class="col-12 col-sm-12 col-md-7 col-lg-9 content profile">
+          </div>
+
+         <div id="git_link" data-simplebar class="col-12 col-sm-12 col-md-7 col-lg-9 content git_link">
+
+         </div>
+
+
+
+
+
+
+        </div>
+	</div>
+</section>
+
+
+
+
+
+
+</body>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+{#<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"></script>#}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/4.2.3/simplebar.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/filterizr/2.2.3/jquery.filterizr.min.js"></script>
+<script src="{% static 'usr_profile_style.js' %}"></script>
+
+
+
+<script type="text/javascript">
+
+    function triggerClick(e) {
+}
+
+
+    $(document).ready(function ()
+
+    {
+        $(function(){
+              $('.usrabout').trigger('click');
+            });
+        
+
+        $('#about').click(function () {
+
+                  $.ajax({
+                    url:  "{% url 'user-profile:user-about' %}",
+                      data: {
+                        'id': "{{ user_id }}"
+                        },
+                        success: function (data) {
+                            console.log(data)
+                          $("#about-me").html(data);
+                        }
+                 });
+        });
+
+
+         $('#user-education').click(function () {
+
+                  $.ajax({
+                    url:  "{% url 'user-profile:user-education' %}",
+                      data: {
+                        'id': "{{ user_id }}"
+                        },
+                        success: function (data) {
+                            console.log(data)
+                          $("#education").html(data);
+                        }
+                 });
+        });
+
+
+          $('#user-expreience').click(function () {
+
+
+                  $.ajax({
+                    url:  "{% url 'user-profile:user-experience' %}",
+                      data: {
+                        'id': "{{ user_id }}"
+                        },
+                        success: function (data) {
+                            console.log(data)
+                          $("#experience").html(data);
+                        }
+                 });
+        }) ;
+
+          $('#user-portfolio').click(function () {
+
+              $.ajax({
+
+                  url: "{% url  'user-profile:user-portfolio' %}",
+                  data:{
+                      'id':"{{ user_id }}"
+                  },
+                  success: function (data) {
+
+                      $("#portfolio").html(data)
+
+                  }
+              })
+
+          });
+
+
+
+
+         $('#user-contact').click(function () {
+
+            $.ajax({
+                   url: "{% url  'user-profile:user-conatct-info' %}",
+                  data:{
+                      'id':"{{ user_id }}"
+                  },
+                  success: function (data) {
+
+                      $("#contact").html(data)
+
+                  }
+            })
+
+        });
+
+
+
+          
+    });
+
+
+
+</script>
+</html>

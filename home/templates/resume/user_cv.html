@@ -1,0 +1,230 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Resume CV Design</title>
+	<link rel="stylesheet" href="{% static 'user_cv.css' %}">
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="resume">
+
+
+			<div class="left">
+				<div class="img_holder">
+					<img src="{{ proforma.user.profile_image.url }}" alt="picture">
+				</div>
+				<div class="contact_wrap pb">
+					<div class="title">
+						Contact
+					</div>
+					<div class="contact">
+						<ul>
+							<li>
+								<div class="li_wrap">
+									<div class="icon"><i class="fas fa-mobile-alt" aria-hidden="true"></i></div>
+									<div class="text">{{ proforma.contact }}</div>
+								</div>
+							</li>
+							<li>
+								<div class="li_wrap">
+									<div class="icon"><i class="fas fa-envelope" aria-hidden="true"></i></div>
+									<div class="text">{{ proforma.user.email }}</div>
+								</div>
+							</li>
+							<li>
+								<div class="li_wrap">
+									<div class="icon"><i class="fab fa-weebly" aria-hidden="true"></i></div>
+									<div class="text">{{ address.website }}</div>
+								</div>
+							</li>
+							<li>
+								<div class="li_wrap">
+									<div class="icon"><i class="fas fa-map-signs" aria-hidden="true"></i></div>
+									<div class="text">{{ address.country }}/{{ address.city }}</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+{#				<div class="skills_wrap pb">#}
+{#					<div class="title">#}
+{#						Skills#}
+{#					</div>#}
+{#					<div class="skills">#}
+{#						<ul>#}
+{#							<li>#}
+{#								<div class="li_wrap">#}
+{#									<div class="icon"><i class="fab fa-html5"></i></div>#}
+{#									<div class="text">HTML</div>#}
+{#								</div>#}
+{#							</li>#}
+{#							<li>#}
+{#								<div class="li_wrap">#}
+{#									<div class="icon"><i class="fab fa-css3-alt"></i></div>#}
+{#									<div class="text">CSS</div>#}
+{#								</div>#}
+{#							</li>#}
+{#							<li>#}
+{#								<div class="li_wrap">#}
+{#									<div class="icon"><i class="fab fa-js"></i></div>#}
+{#									<div class="text">Javascript</div>#}
+{#								</div>#}
+{#							</li>#}
+{#							<li>#}
+{#								<div class="li_wrap">#}
+{#									<div class="icon"><i class="fab fa-python"></i></div>#}
+{#									<div class="text">Python</div>#}
+{#								</div>#}
+{#							</li>#}
+{#                            #}
+{#						</ul>#}
+{#					</div>#}
+{#				</div>#}
+
+
+				<div class="hobbies_wrap pb">
+					<div class="title">
+						hobbies
+					</div>
+					<div class="hobbies">
+						<ul>
+                            {% for hobbie in hobbies %}
+                                <li>
+                                    <div class="li_wrap">
+                                        <div class="icon"><i class="{{ hobbie.Follow }}"></i></div>
+                                        <div class="text">{{ hobbie.Name }}</div>
+                                    </div>
+							    </li>
+                            {% endfor %}
+
+						</ul>
+					</div>
+				</div>
+			</div>
+
+
+
+
+			<div class="right" >
+				<div class="header">
+					<div class="name_role">
+						<div class="name">
+							{{ proforma.First_name }} {{ proforma.Last_name }}
+						</div>
+						<div class="role">
+							{{ proforma.specialist }}
+						</div>
+					</div>
+					<div class="about">
+						{{ proforma.bio }}
+					</div>
+				</div>
+				<div class="right_inner" style="border: 1px solid gray;">
+					<div class="exp">
+						<div class="title">
+							skills
+						</div>
+						<div class="exp_wrap">
+							<ul>
+
+                                {% for skill in skills %}
+                                    <li>
+									<div class="li_wrap">
+										<div class="date">
+											{{ skill.session }}
+										</div>
+										<div class="info">
+											<p class="info_title">
+												{{ skill.skill_name }}
+											</p>
+											<p class="info_com">
+												{{ skill.skill_dependency }}
+											</p>
+											<p class="info_cont">
+												{{  skill.skill_text }}
+											</p>
+										</div>
+									</div>
+								</li>
+                                {% endfor %}
+							</ul>
+						</div>
+					</div>
+
+
+
+					<div class="education">
+						<div class="title">
+							Education
+						</div>
+
+                    <table id="customers">
+                          <tr>
+                              <th scope="col" style="color: #9153c9;">#</th>
+                              <th scope="col" style="color: #9153c9;">CLASS</th>
+                              <th scope="col" style="color: #9153c9;">BOARD/UNIVERSITY</th>
+                              <th scope="col" style="color: #9153c9;">YEAR</th>
+                              <th scope="col" style="color: #9153c9;">DIVISION/PERCENTAGE</th>
+                          </tr>
+
+                          {% for edu in educations %}
+                                   <tr>
+                                        <th style="color: #9153c9;">{{ forloop.counter }}</th>
+                                            <td>{{ edu.board_class }}</td>
+                                            <td>{{ edu.board_name }}</td>
+                                            <td>{{ edu.year }}</td>
+                                            <td>{{ edu.percentage }}</td>
+                                   </tr>
+                          {% endfor %}
+                    </table>
+
+
+
+				</div>
+
+                    {% ifequal flag 1 %}
+
+                    <div class="education">
+						<div class="title">
+							experience
+						</div>
+						<div class="exp_wrap">
+							<ul>
+                                {% for exp in expreience%}
+
+                                    	<li>
+									<div class="li_wrap">
+										<div class="date">
+											{{ exp.expreience }}
+										</div>
+										<div class="info">
+											<p class="info_title">
+												{{ exp.job_title }}
+											</p>
+											<p class="info_com">
+												{{ exp.company_name }}
+											</p>
+										</div>
+									</div>
+								</li>
+                                {% endfor %}
+
+							</ul>
+						</div>
+					</div>
+                    {% endifequal %}
+
+
+			</div>
+
+		</div>
+	</div>
+
+    </div>
+</body>
+
+</html>

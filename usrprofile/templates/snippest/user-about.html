@@ -1,0 +1,57 @@
+			<div class="card about-me">
+					<h3 class="sideline font-weight-bold mb-2">About Me</h3>
+					<div class="label title mb-2"><i class="fas fa-code"></i>{{ profile.specialist }}</div>
+					<p> {{ profile.bio }}
+					</p>
+					<p>{{ profile.special_activity }}</p>
+					<h3 class="sideline font-weight-bold mb-3">Hobbies and Interests</h3>
+					<div class="row interests">
+                        {% for hobbi in hobbies %}
+                            <div class="col-4 col-md-4 col-lg-2 text-center mt-3">
+							<i class="{{ hobbi.Follow }} mb-3"></i>
+							<h6 class="font-weight-bold">{{ hobbi.Name }}</h6>
+						</div>
+                        {% endfor %}
+
+					</div>
+
+				</div>
+
+				<div class="row mt-5">
+					<div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-3">
+						<div class="card card--stats d-flex flex-row align-items-center">
+							<i class="fas fa-award ml-2"></i>
+							<div class="text-wrapper">
+								<h5 class="font-weight-bold ml-3 mb-0">{{ profile.experience }} Years</h5>
+								<p class="ml-3 mb-0">Work experience</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-3">
+						<div class="card card--stats d-flex flex-row align-items-center">
+							<i class="fas fa-users"></i>
+							<div class="text-wrapper">
+								<h5 class="font-weight-bold ml-3 mb-0">{{ friend }} Active</h5>
+								<p class="ml-3 mb-0">Friends</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-3">
+						<div class="card card--stats d-flex flex-row align-items-center">
+							<i class="far fa-check-circle"></i>
+							<div class="text-wrapper">
+								<h5 class="font-weight-bold ml-3 mb-0">{{ project }} Projects</h5>
+								<p class="ml-3 mb-0">Completed</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-3">
+						<div class="card card--stats d-flex flex-row align-items-center">
+							<i class="fas fa-wrench"></i>
+							<div class="text-wrapper">
+								<h5 class="font-weight-bold ml-3 mb-0">Available</h5>
+								<p class="ml-3 mb-0">For {{ profile.available }}</p>
+							</div>
+						</div>
+					</div>
+				</div>

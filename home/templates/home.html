@@ -1,0 +1,270 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+     <div class="scroll-up-btn">
+        <i class="fas fa-angle-up"></i>
+    </div>
+
+    {% if not  user.is_authenticated %}
+        {% include 'snippest/model-auth.html' %}
+    {% endif %}
+
+
+
+     {% include 'snippest/navbar.html' %}
+
+
+    <!-- home section start -->
+        <section  class="home" id="home" style= "background: url('{{ proforma.proforma_image.url }}') no-repeat center center fixed ">
+        <div class="max-width">
+            <div class="home-content">
+                <div class="text-1">
+                    Hello, my name is</div>
+                    <div class="text-2">
+                   {{ proforma.First_name }}</div>
+                    <div class="text-3">
+                        <input type="hidden" id="myvar" name="variable" value="{{domain}}">
+
+{#                        <div  id="myvar">{{ domain}}</div>#}
+                    And I'm a <span class="typing"></span></div>
+                    <a href="{% url 'user-profile:edit-profile-home' user_id=proforma.user.id %}">Hire me</a>
+                 </div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+    <!-- profile section start -->
+    <section class="about" id="about">
+        <div class="max-width">
+            <h2 class="title">About me</h2>
+                <div class="about-content">
+                        <div class="column left">
+                            <img src="{{ proforma.user.profile_image.url }}" alt="">
+                         </div>
+                        <div class="column right">
+                                <div class="text">
+                                    <input type="hidden" id="myvar1" name="variable" value="{{domain}}">
+                                    I'm {{proforma.First_name }} {{proforma.Last_name }} and I'm a <span class="typing-2"></span>
+                                </div>
+                                <p>
+                                 {{ proforma.bio }}</p>
+                                  <a href="{{ proforma.my_resume.file.url }}">Download CV</a>
+{#                                <a href="{% url 'home:doenload_cv' user_id=proforma.user.id %}">Download CV</a>#}
+                         </div>
+                </div>
+        </div>
+    </section>
+
+
+    <!-- skills section start -->
+    <section class="skills" id="skills">
+        <div class="max-width">
+            <h2 class="title"> My skills</h2>
+            <div class="skills-content">
+                <div class="column left">
+                    <div class="text">
+                        My creative skills & experiences.</div>
+                        <p>
+                        {{ proforma.special_activity }}</p>
+                        <a href="{% url 'user-profile:edit-profile-home' user_id=proforma.user.id %}">Read more</a>
+                </div>
+                <div class="column right">
+                           <table class="table">
+                           <thead>
+                                <tr>
+                                      <th scope="col">EXPREIENCE</th>
+                                      <th scope="col">JOB ROLE</th>
+                                      <th scope="col">COMPANY NAME</th>
+                                </tr>
+                           </thead>
+                     <tbody>
+                         {% for exp in expreience %}
+                          <tr>
+                                <td style="color: #3EB2EF">
+								    <i class="far fa-calendar-alt mr-2" style="color: blue"></i>{{ exp.expreience }}
+							     </td>
+                                 <td>
+	                                <h6 class="font-weight-bold">{{ exp.job_title }}</h6>
+                                  </td>
+                                  <td>
+			                         <h6 class="blue">{{ exp.company_name }}</h6>
+                                  </td>
+                          </tr>
+                         {% endfor %}
+                      </tbody>
+                     </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+    <!-- teams section start -->
+    <section class="teams" id="teams">
+        <div class="max-width">
+            <h2 class="title">My teams</h2>
+            <div class="carousel owl-carousel">
+
+                {% for friend in friends %}
+                    <a href="{% url 'home:friend-details' user_id=friend.id %}">
+                     <div class="card">
+                    <div class="box">
+                        <img src="{{ friend.profile_image.url}}" alt="">
+                        <div class="text">{{ friend.profile.First_name }}</div>
+                        <p>{{ friend.profile.specialist }}</p>
+                    </div>
+                </div>
+
+                    </a>
+
+
+                {% endfor %}
+
+            </div>
+        </div>
+</section>
+
+
+
+    <!-- contact section start -->
+    <section class="contact" id="contact">
+        <div class="max-width">
+            <h2 class="title">Contact me</h2>
+
+            <div class="contact-content">
+                <div class="column left">
+                    <div class="text">Get in Touch</div>
+                    <p>Email us with any question or inquires or call 7718107872. we would be happy to answer your questions and set up a meeting with you.
+                     </p>
+                    <div class="icons">
+                        <div class="row">
+                            <i class="fas fa-user"></i>
+                            <div class="info">
+                                <div class="head">Name</div>
+                                <div class="sub-title">Shreya Datta</div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="info">
+                                <div class="head">Address</div>
+                                <div class="sub-title">
+                                Konnagar , West Bengal</div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <i class="fas fa-envelope"></i>
+                            <div class="info">
+                                <div class="head">
+                                Email</div>
+                                <div class="sub-title">
+                                idontknowheremail@gmail.com</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="column right">
+                    <div class="text">Message me</div>
+
+
+
+                    <form action="" method="post" id="email_send">
+                        {% csrf_token %}
+                        <div class="fields">
+                            <div class="field name">
+                                <input type="text" placeholder="Name" required name="name" id="id_name">
+                            </div>
+
+                            <div class="field email">
+                                <input type="email" placeholder="Email" required name="email" id="id_email">
+                            </div>
+                        </div>
+
+
+                        <div class="field">
+                            <input type="text" placeholder="Subject" required name="subject" id="id_subject">
+                        </div>
+                        <div class="field textarea">
+                             <textarea id="id_text" name="text" rows="5" cols="5" placeholder="Message">
+                             </textarea>
+                        </div>
+
+                        <div class="button">
+                            <button type="submit">Send message</button>
+                        </div>
+                    </form>
+
+
+                </div>
+             </div>
+         </div>
+    </section>
+
+    <!-- footer section start -->
+    <footer>
+        <span>Created By <a href="#">DjangoTeam</a> | <span class="far fa-copyright"></span> 2020 All rights reserved.</span>
+    </footer>
+
+
+
+
+{% endblock content %}
+
+
+
+{% block ajax-request %}
+    {% include 'snippest/model-login-ajax-request.html' %}
+{% endblock ajax-request %}
+
+{% block edit_javascripts %}
+         <script src="{% static 'script.js' %}"></script>
+
+        <script>
+         $("#email_send").submit(function (e) {
+
+     // preventing from page reload and default actions
+            e.preventDefault();
+            console.log("dhjd----------")
+            // serialize the data for sending the form data.
+            var serializedData = $(this).serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'home:send-email' %}",
+                data: serializedData,
+                success: function (response) {
+                    // on successfull creating object
+                    // 1. clear the form.
+                    $("#email_send").trigger('reset');
+                    // 2. focus to nickname input
+                    console.log(response['success'])
+                    alert(response['success']);
+
+                },
+                error: function (response) {
+                    // alert the error if any error occured
+                    console.log('errors --------')
+                   alert(response["responseJSON"]["error"]);
+                    $("#email_send").trigger('reset');
+                }
+            })
+
+         })
+        </script>
+{% endblock edit_javascripts %}
+

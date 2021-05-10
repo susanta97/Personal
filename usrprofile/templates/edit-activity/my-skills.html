@@ -1,0 +1,184 @@
+{% extends 'base-edit.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block edit_content %}
+
+    <div class="row">
+    <h3 class="font-weight-bold sideline mb-3">Skills</h3>
+    </div>
+
+        <div class="row" style="margin-right: auto">
+        <form method="post" novalidate enctype="multipart/form-data">
+             {% csrf_token %}
+                <div class="row">
+                     <table class="table table-striped">
+                            {{ skills.management_form }}
+                                    {% for form in skills %}
+                                            {% if forloop.first %}
+                                        <thead>
+                                                <tr>
+                                                    {% for field in form.visible_fields %}
+                                                        <th>{{ field.label|capfirst }}</th>
+                                                    {% endfor %}
+                                                </tr>
+                                        </thead>
+                                              {% endif %}
+                                             <tr class="{% cycle row1 row2  %} formset_row">
+                                              {% for field in form.visible_fields %}
+                                               <td>
+                                                    {% if forloop.first %}
+                                                        {% for hidden in form.hidden_fields %}
+                                                            {{ hidden }}
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                    {{ field.errors.as_ul }}
+
+                                                    {% if field.help_text %}
+                                                        <p style="color: grey">{{ field.help_text }}</p>
+                                               {% endif %}
+                                                {% ifnotequal  field.field.widget.input_type 'checkbox' %}
+                                                    {{ field }}
+                                                {% else %}
+
+                                                 <div class="row" style="position: center;margin-top: 10px ;">
+                                                     {{ field }}
+                                                 </div>
+
+                                               {% endifnotequal %}
+
+
+                                               </td>
+                                              {% endfor %}
+                                              </tr>
+                                    {% endfor %}
+                     </table>
+
+                    </div>
+
+
+         <div class="row">
+              <h3 class="font-weight-bold sideline mb-3">Experience</h3>
+              <table class="table table-striped"  style="display:inline">
+                            {{ expreience.management_form }}
+                                    {% for form in expreience %}
+
+                                            {% if forloop.first %}
+
+                                        <thead>
+                                                <tr >
+                                                    {% for field in form.visible_fields %}
+                                                        <th>{{ field.label|capfirst }}</th>
+                                                    {% endfor %}
+                                                </tr>
+                                        </thead>
+                                              {% endif %}
+                                             <tr style="height: 1px" class="{% cycle row1 row2  %} formset_row1">
+
+                                              {% for field in form.visible_fields %}
+
+                                               <td >
+
+                                                    {% if forloop.first %}
+                                                        {% for hidden in form.hidden_fields %}
+                                                            {{ hidden }}
+                                                        {% endfor %}
+                                                    {% endif %}
+
+
+                                               {% ifnotequal field.field.widget.input_type  "file" %}
+                                                   {{ field }}
+
+                                                   {% if field.errors %}
+                                                      <div style="color: red">{{ field.non_field_errors }}</div>
+                                                   {% endif %}
+
+
+
+                                               {% endifnotequal %}
+
+                                               {% ifequal field.field.widget.input_type  "file" %}
+
+                                                    {% ifequal field.initial 'none' %}
+                                                           <div class="row" style="float: right; padding: 10px ;position: center">
+                                                           <label style="cursor: pointer ;margin-right: 5px" for="{{ field.id_for_label }}"><span class="fas fa-upload"></span></label>
+                                                        </div>
+
+                                                    {% else %}
+
+                                                    {% ifnotequal field.initial None  %}
+
+                                                             <div class="row" style="float: right; padding: 8px">
+                                                                 <label style="cursor: pointer ;margin-right: 5px" for="{{ field.id_for_label }}"><span class="fas fa-upload"></span></label>
+                                                                  <a href="/media/{{ field.initial }}"><span class="fas fa-download"></span></a>
+                                                            </div>
+
+                                                    {% else %}
+
+                                                        <div class="row" style="float: right; padding: 10px ;position: center">
+                                                        <label style="cursor: pointer ;margin-right: 5px" for="{{ field.id_for_label }}"><span class="fas fa-upload"></span></label>
+                                                        </div>
+
+                                                    {% endifnotequal %}
+                                                    {% endifequal %}
+
+                                                   <div style="width: 2px">
+                                                   {{ field }}
+                                                   </div>
+
+                                               {% endifequal %}
+
+                                               {% ifequal field.field.widget.input_type 'checkbox' %}
+                                                 <div class="row" style="position: center;margin-top: 10px">
+                                                     {{ field }}
+                                                 </div>
+                                               {% endifequal %}
+
+                                                    {% if field.help_text %}
+                                                        <p style="color: grey">{{ field.help_text }}</p>
+                                               {% endif %}
+
+                                               </td>
+
+                                              {% endfor %}
+                                              </tr>
+                                    {% endfor %}
+                     </table>
+
+         </div>
+
+
+
+
+          <div class="row">
+           <button type="submit" class="btn btn-success" style="margin-left: 0.5%">Save</button>
+          </div>
+        </form>
+
+        </div>
+
+
+{% endblock edit_content %}
+
+
+{% block edit_javascripts %}
+   <script src="{% static 'formset/jquery.formset.js' %}"></script>
+    <script type="text/javascript">
+        $('.formset_row').formset({
+            addText: 'Add',
+            deleteText: 'remove',
+            prefix: 'myskills'
+        });
+    </script>
+
+    <script type="text/javascript">
+        $('.formset_row1').formset({
+            addText: 'Add',
+            deleteText: 'remove',
+            prefix: 'my_exp'
+        });
+    </script>
+
+
+{% endblock edit_javascripts %}

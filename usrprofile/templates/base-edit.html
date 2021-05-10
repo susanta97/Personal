@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load usrprofile_extras %}
+
+{% block content %}
+
+<div class="row" style="background: linear-gradient(to right, #9153c9, #CAEBFE);">
+<div class="col-md-12" style="float: right">
+     <a class="font-weight-bold text-red pull-right"  href="{% url 'accounts:logout'%}" style="font-size: 30px  ; margin-right: 20px ;">
+         <i class="fas fa-sign-out-alt"></i></a>
+
+     <a  class="font-weight-bold text-primary pull-right" href="{% url 'user-profile:edit-profile-home' user_id=request.user.id %}" style="font-size: 30px ; margin-right: 20px">
+         <i class="fas fa-home"></i></a>
+</div>
+
+
+</div>
+
+
+    
+
+  <div class="row" style="margin-top: 20px">
+     <div class="col-md-3 col-sm-1 col-xl-3">
+       <div class="panel panel-default">
+
+
+
+            <div class="list-group" style="padding-left: 10px">
+
+                  <a style="font-size: 15px" href="{% url 'account:edit' user_id=request.user.id %}" class="list-group-item{% if request.path == "/account/edit/"|addstr:request.user.id|addstr:"/" %} active{% endif %}">
+                      <span class="fas fa-chevron-circle-right" style="font-size: 15px; position: center"></span> User
+                  </a>
+                  <a style="font-size: 15px" href="{% url 'user-profile:edit-user-about' user_id=request.user.id %}" class="list-group-item{% if request.path == "/user/edit-user-about/"|addstr:request.user.id|addstr:"/" %} active{% endif %}">
+                      <span class="fas fa-chevron-circle-right" style="font-size: 15px; position: center"></span> Profile
+                  </a>
+                  <a style="font-size: 15px" href="{% url 'user-profile:edit-user-edication' user_id=request.user.id %}" class="list-group-item{% if request.path == "/user/edit-user-education/"|addstr:request.user.id|addstr:"/" %} active{% endif %}">
+                   <span class="fas fa-chevron-circle-right" style="font-size: 15px; position: center"></span> Education
+                  </a>
+
+                  <a style="font-size: 15px" href="{% url 'user-profile:edit-user-skills' user_id=request.user.id %}" class="list-group-item{% if request.path == "/user/edit-user-skills/"|addstr:request.user.id|addstr:"/" %} active{% endif %}">
+                     <span class="fas fa-chevron-circle-right" style="font-size: 15px; position: center"></span> Skills Experience
+                  </a>
+
+                  <a style="font-size: 15px" href="{% url 'user-profile:I-am' user_id=request.user.id %}" class="list-group-item{% if request.path == "/user/I-am/"|addstr:request.user.id|addstr:"/" %} active{% endif %}">
+                     <span class="fas fa-chevron-circle-right" style="font-size: 15px; position: center"></span> I am
+                  </a>
+
+                  <a style="font-size: 15px" href="{% url 'user-profile:edit-user-activity' user_id=request.user.id %}" class="list-group-item{% if request.path == "/user/edit-user-activity/"|addstr:request.user.id|addstr:"/" %} active{% endif %}">
+                     <span class="fas fa-chevron-circle-right" style="font-size: 15px; position: center"></span> Project
+                  </a>
+
+                 <a style="font-size: 15px" href="{% url 'user-profile:upload-resume' user_id=request.user.id %}" class="list-group-item{% if request.path == "/user/upload-resume/"|addstr:request.user.id|addstr:"/" %} active{% endif %}">
+                     <span class="fas fa-chevron-circle-right" style="font-size: 15px; position: center"></span> Upload Cv
+                  </a>
+
+                 <a style="font-size: 15px" href="{% url 'user-profile:edit-user-address' user_id=request.user.id %}" class="list-group-item{% if request.path == "/user/edit-user-address/"|addstr:request.user.id|addstr:"/" %} active{% endif %}">
+                   <span class="fas fa-chevron-circle-right" style="font-size: 15px; position: center"></span> Contact
+                 </a>
+            </div>
+      </div>
+     </div>
+
+
+      <div class="col-md-9 col-sm-11 col-xl-9">
+      <div class="container">
+           {% block edit_content %}
+          {% endblock %}
+      </div>
+
+      </div>
+
+   </div>
+
+
+
+
+
+{#    </div>#}
+{% endblock %}
+
+

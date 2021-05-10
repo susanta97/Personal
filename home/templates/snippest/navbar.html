@@ -1,0 +1,40 @@
+{% load static %}
+<nav class="navbar">
+        <div class="max-width">
+{#            <div class="logo">#}
+{#             <a href="#">Portfo<span>lio.</span></a>#}
+{#            </div>#}
+            {% if request.user.is_authenticated %}
+            <ul class="menu">
+                <li><a href="#home" class="menu-btn">Home</a></li>
+                <li><a href="#about" class="menu-btn">About</a></li>
+                <li><a href="#skills" class="menu-btn">Skills</a></li>
+                <li><a href="#teams" class="menu-btn">Teams</a></li>
+                <li><a href="#contact" class="menu-btn">Contact</a></li>
+
+                <div class="btn-group dropdown profile ">
+                    <img class="account-image rounded-circle m-auto dropdown-toggle" id="id_profile_links" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="{{ request.user.profile_image.url }}" alt="codingwithmitch logo" width="40" height="40"
+                            >
+                    <div class="dropdown-menu" aria-labelledby="id_profile_links">
+{#                                <a class="dropdown-item" href="{% url 'user-profile:user-home' %}">Account</a>#}
+                            <a class="dropdown-item" href="{% url 'user-profile:edit-profile-home' user_id=request.user.id %}">Account</a>
+                                <a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>
+                    </div>
+                </div>
+
+
+
+            </ul>
+
+
+            {% else %}
+                <ul class="menu">
+                <li><a class="p-2 text-white" href="{% url 'account:login' %}">Login</a></li>
+                <li> <a class="btn  btn-outline-primary" href="{% url 'account:signup' %}">Register</a></li>
+                </ul>
+            {% endif %}
+            <div class="menu-btn">
+                            <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>

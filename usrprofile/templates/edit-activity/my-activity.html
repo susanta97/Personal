@@ -1,0 +1,209 @@
+{% extends 'base-edit.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+ {% block extracss %}
+     <style rel="stylesheet">
+
+@media screen and (min-width: 1500px) {
+
+  body {
+    background-color: lightgreen;
+  }
+}
+
+@media screen and (min-width: 2000px) {
+
+  body {
+    background-color: lavender;
+  }
+}
+
+     </style>
+ {% endblock extracss %}
+
+
+{% block edit_content %}
+
+    <div class="row">
+    <div class="container">
+        <form method="post" novalidate enctype="multipart/form-data">
+             {% csrf_token %}
+                <div class="row justify-content-md-center" >
+                      <table class="table table-striped"  style="display:inline">
+                            {{ protfolio.management_form }}
+                                    {% for form in protfolio %}
+
+                                            {% if forloop.first %}
+
+                                        <thead>
+                                                <tr >
+                                                    {% for field in form.visible_fields %}
+                                                        <th>{{ field.label|capfirst }}</th>
+                                                    {% endfor %}
+                                                </tr>
+                                        </thead>
+                                              {% endif %}
+                                             <tr style="height: 1px" class="{% cycle row1 row2  %} formset_row">
+                                              {% for field in form.visible_fields %}
+
+                                               <td >
+                                {# Include the hidden fields in the form #}
+
+                                                    {% if forloop.first %}
+                                                        {% for hidden in form.hidden_fields %}
+                                                            {{ hidden }}
+                                                        {% endfor %}
+                                                    {% endif %}
+{#                                                    {{ field.errors.as_ul }}#}
+{#                                               {{ field }}#}
+{#                                               {{ field.field.widget.input_type }}#}
+
+
+                                               {% ifnotequal field.field.widget.input_type  "file" %}
+                                                   {{ field }}
+
+                                                   {% if field.errors %}
+                                                      <div style="color: red">{{ form.errors }}</div>
+                                                   {% endif %}
+
+                                               {% endifnotequal %}
+
+                                               {% ifequal field.field.widget.input_type  "file" %}
+
+{#                                                      <button type="button" class="btn btn-primary js-upload-photos">#}
+{#                                                        <span class="fas fa-upload"></span>#}
+{#                                                      </button>#}
+                                                    {% ifequal field.initial 'none' %}
+                                                           <div class="row" style="float: right; padding: 10px ;position: center">
+                                                           <label style="cursor: pointer ;margin-right: 5px" for="{{ field.id_for_label }}"><span class="fas fa-upload"></span></label>
+                                                        </div>
+
+                                                    {% else %}
+
+                                                    {% ifnotequal field.initial None  %}
+
+                                                             <div class="row" style="float: right; padding: 8px">
+                                                                 <label style="cursor: pointer ;margin-right: 5px" for="{{ field.id_for_label }}"><span class="fas fa-upload"></span></label>
+                                                                  <a href="/media/{{ field.initial }}"><span class="fas fa-download"></span></a>
+                                                            </div>
+
+                                                    {% else %}
+
+                                                        <div class="row" style="float: right; padding: 2px ;position: center">
+                                                        <label style="cursor: pointer ;margin-right: 5px" for="{{ field.id_for_label }}"><span class="fas fa-upload"></span></label>
+                                                        </div>
+
+                                                    {% endifnotequal %}
+                                                    {% endifequal %}
+
+                                                   <div style="width: 2px">
+                                                   {{ field }}
+                                                   </div>
+
+                                               {% endifequal %}
+
+                                               {% ifequal field.field.widget.input_type 'checkbox' %}
+                                                 <div class="row" style="position: center;margin-top: 10px">
+                                                     {{ field }}
+                                                 </div>
+                                               {% endifequal %}
+
+{#                                               {{ field.field.widget.input_type }}#}
+                                                    {% if field.help_text %}
+                                                        <p style="color: grey">{{ field.help_text }}</p>
+                                               {% endif %}
+
+                                               </td>
+
+                                              {% endfor %}
+                                              </tr>
+                                    {% endfor %}
+                     </table>
+                    </div>
+
+
+
+
+                <div class="row">
+                     <button type="submit" class="btn btn-success" style="margin-left: 0.5%">Save</button>
+                </div>
+        </form>
+
+
+    </div>
+
+    </div>
+
+
+    <div class="row filter-container mt-3" style="margin-right: 50px" >
+
+
+            {% for activity in activity %}
+
+                <div class="col-md-3" data-category="1" data-sort="value">
+
+
+						<figure class="figure mb-5">
+							<a class="popup-link"
+                               href="{{ activity.activity_head_report.url }}">
+{#								href="{% url 'user-profile:edit-user-activity-edit' user_id=request.user.id id=activity.id %}">#}
+{#                                width="210" height="200" class="imagediv"#}
+                                <img  class="img-fluid"
+									src="{{ activity.activity_head_image.url }}"
+									alt="A generic square placeholder image with rounded corners in a figure.">
+                            </a>
+							<figcaption class="font-weight-bold figure-caption">{{ activity.activity_name }}
+							</figcaption>
+						</figure>
+                </div>
+            {% endfor %}
+
+         <div class="col-md-3 filtr-item" data-category="1" data-sort="value">
+
+						<figure class="figure mb-5">
+							<a class="popup-link"
+								href="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/sample1.jpg"><img
+									src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/sample1.jpg"
+
+									class="img-fluid"
+									alt="A generic square placeholder image with rounded corners in a figure."></a>
+							<figcaption class="font-weight-bold figure-caption">A caption for the above image.
+							</figcaption>
+						</figure>
+					</div>
+
+					<div class="col-md-3 filtr-item" data-category="2" data-sort="value">
+						<figure class="figure mb-5">
+							<a class="popup-link"
+								href="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/sample2.jpg"><img
+									src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/sample2.jpg"
+									class="img-fluid popup-link"
+									alt="A generic square placeholder image with rounded corners in a figure."></a>
+							<figcaption class="font-weight-bold figure-caption">A caption for the above image.
+							</figcaption>
+						</figure>
+					</div>
+
+
+
+    </div>
+
+
+
+
+
+{% endblock edit_content %}
+
+
+{% block edit_javascripts %}
+<script src="{% static 'formset/jquery.formset.js' %}"></script>
+    <script type="text/javascript">
+        $('.formset_row').formset({
+            addText: 'Add',
+            deleteText: 'remove',
+            prefix: 'my_activity'
+        });
+    </script>
+
+{% endblock edit_javascripts %}

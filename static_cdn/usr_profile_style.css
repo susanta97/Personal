@@ -1,0 +1,372 @@
+
+body {
+  background: #000;
+}
+
+html,
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  background: #fafafa;
+  overflow-x: hidden;
+}
+@media (min-width: 768px) {
+  body {
+    overflow-y: hidden;
+  }
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+h5 {
+  font-size: 16px;
+}
+
+h6 {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+p {
+  font-size: 14px;
+}
+
+p.large-copy {
+  font-size: 16px;
+}
+
+p.copy {
+  font-size: 14px;
+}
+
+.caption {
+  font-size: 12px;
+}
+
+.text-link--small {
+  font-size: 14px;
+}
+
+label,
+.label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.label-large {
+  font-size: 16px;
+}
+
+.wrapper .container {
+  border-radius: 6px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.06) inset;
+}
+@media (min-width: 1400px) {
+  .wrapper .container {
+    margin: 50px auto;
+  }
+}
+
+.background-blue {
+  background: #4A90E2;
+}
+
+.blue {
+  color: #4A90E2;
+}
+
+.sidebar {
+  padding: 32px;
+}
+.sidebar img {
+  box-shadow: 0 1px 32px rgba(20, 23, 26, 0.12);
+}
+.sidebar figcaption {
+  margin-top: 32px;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1;
+}
+.sidebar figcaption small {
+  font-size: 32px;
+  font-weight: inherit;
+}
+.sidebar .main-menu li {
+  border-bottom: 1px solid #fff;
+  padding: 15px 0;
+  transition: 0.3s ease-out;
+}
+.sidebar .main-menu li a {
+  font-size: 16px;
+  transition: inherit;
+}
+.sidebar .main-menu li a i {
+  margin: 0 12px 0 18px;
+}
+
+.content {
+  padding: 20px 15px;
+  background: #F8F9FA;
+  display: none;
+}
+.content.active {
+  display: block;
+}
+@media (min-width: 768px) {
+  .content {
+    height: 703px;
+    padding: 40px 35px;
+    animation: 0.3s ease 1 slideInFromRight;
+  }
+}
+
+.slide-to-right {
+  animation: 1s ease 1 slideToRight;
+}
+
+@keyframes slideToRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(120%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.card {
+  padding: 25px;
+  border-color: transparent;
+  box-shadow: 0 1px 32px rgba(20, 23, 26, 0.12);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 3px;
+  background-color: #fff;
+}
+.card p:last-of-type {
+  margin-bottom: 35px;
+}
+.card .title {
+  color: #4A90E2;
+}
+.card .title i {
+  margin-right: 5px;
+}
+.card .interests .col-md-2:hover {
+  background: #fafafa;
+}
+.card .interests i {
+  font-size: 30px;
+  color: #4A90E2;
+}
+.card--stats {
+  padding: 15px 10px;
+}
+.card--stats i {
+  font-size: 30px;
+  color: #4A90E2;
+}
+.card--stats p {
+  font-size: 12px;
+  color: #4A90E2;
+}
+
+.sideline {
+  overflow: hidden;
+}
+.sideline:before, .sideline:after {
+  background-color: #000;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+.sideline:before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+.sideline:after {
+  left: 0.5em;
+  margin-right: -50%;
+}
+
+.timeline .job-date {
+  font-size: 14px;
+}
+@media (min-width: 992px) {
+  .timeline .job-date {
+    text-align: right;
+    position: relative;
+  }
+  .timeline .job-date:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 150%;
+    background-color: #4A90E2;
+    z-index: 3;
+    margin-top: 6px;
+  }
+  .timeline .job-description {
+    position: relative;
+  }
+  .timeline .job-description:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
+    background-color: grey;
+    z-index: 2;
+  }
+}
+
+.filter-controls li {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  padding: 7px 11px;
+  background: #fafafa;
+  margin-right: 0;
+  margin-bottom: 0.5rem;
+  transition: 0.3s ease-in;
+}
+.filter-controls li.active {
+  background: #4A90E2;
+  color: #fff;
+}
+@media (max-width: 768px) {
+  .filter-controls li {
+    display: block;
+    margin-right: 0.5rem;
+  }
+}
+.filter-controls li:hover, .filter-controls li:focus, .filter-controls li:active {
+  background-color: #4A90E2;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Flaired edges, by Tomas Theunissen */
+.hr-container {
+  width: 100px;
+  height: 1px;
+  background-color: black;
+  position: relative;
+}
+.hr-container .circle {
+  display: inline-block;
+  vertical-align: middle;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border: solid 1px black;
+  border-radius: 50%;
+  position: absolute;
+  top: -6px;
+  left: calc(50% - 5px);
+}
+
+.hr-blue {
+  margin-top: 20px;
+  background: #3EB2EF;
+}
+
+.hr-blue .circle {
+  background: #3EB2EF;
+  border-color: #3EB2EF;
+}
+
+
+#profileDisplay { display: block; height: 150px; width: 100%; margin: 0px auto; border-radius: 50%; }
+.img-placeholder {
+  width: 100%;
+  color: white;
+  background: black;
+  opacity: .7;
+  height: 150px;
+  border-radius: 50%;
+  z-index: 2;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+}
+.img-placeholder h4 {
+  margin-top: 30%;
+  color: white;
+}
+.img-div:hover .img-placeholder {
+  display: block;
+  cursor: pointer;
+}
+
+
+	.image-container{
+		max-width: 250px;
+		height: auto;
+		position: relative;
+	}
+	.field-heading{
+		color: #737373;
+	}
+	#id_confirm{
+		color: green;
+	}
+	#id_confirm:hover {
+		opacity: 0.3;
+	}
+	#id_cancel:hover {
+		opacity: 0.3;
+	}
+	#id_cancel{
+		color: red;
+	}
+	.material-icons{
+		font-size: 30px;
+	}
+	.material-icons:hover{
+		cursor: pointer;
+	}

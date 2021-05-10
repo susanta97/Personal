@@ -1,0 +1,79 @@
+        {% load static %}
+                <ul class="filter-controls list-unstyled list-inline">
+					<li class="list-inline-item active" data-filter="all"> <i class="fas fa-list-ul"></i> All items
+					</li>
+
+                    <li class="list-inline-item" data-filter="1"><a id="git_hub_link" href="#git_link"><i class="fas fa-code"></i> Development </a></li>
+					<li class="list-inline-item" data-filter="2"> <i class="fas fa-paint-brush"></i> Design </li>
+					<li class="list-inline-item" data-filter="3"> <i class="fas fa-camera"></i> Photography </li>
+
+				</ul>
+
+				<div class="row filter-container mt-3">
+
+                    {% for activity in activity %}
+                        <div class="col-md-3 filtr-item" data-category="1" data-sort="value">
+						<figure class="figure mb-5">
+							<a class="popup-link"
+								href="{{ activity.activity_head_report.url}}"><img
+									src="{{ activity.activity_head_image.url }}"
+									class="img-fluid"
+									alt="A generic square placeholder image with rounded corners in a figure."></a>
+							<figcaption class="font-weight-bold figure-caption">{{ activity.activity_name }}
+							</figcaption>
+						</figure>
+					</div>
+                    {% endfor %}
+
+					<div class="col-md-3 filtr-item" data-category="2" data-sort="value">
+						<figure class="figure mb-5">
+							<a class="popup-link"
+								href="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/sample2.jpg"><img
+									src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/sample2.jpg"
+									class="img-fluid popup-link"
+									alt="A generic square placeholder image with rounded corners in a figure."></a>
+							<figcaption class="font-weight-bold figure-caption">A caption for the above image.
+							</figcaption>
+						</figure>
+					</div>
+
+					<div class="col-md-3 filtr-item" data-category="3" data-sort="value">
+						<figure class="figure mb-5">
+							<a class="popup-link"
+								href="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/sample3.jpg"><img
+									src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/sample3.jpg"
+									class="img-fluid popup-link"
+									alt="A generic square placeholder image with rounded corners in a figure."></a>
+							<figcaption class="font-weight-bold figure-caption">A caption for the above image.
+							</figcaption>
+						</figure>
+					</div>
+
+				</div>
+
+
+
+            <div class="row filter-container mt-3">
+
+                <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">PROJECT NAME</th>
+      <th scope="col"><i class="fab fa-github" style="font-size: 20px ; color: #3EB2EF ; padding-right: 10px"> github link</i></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for activity in activity %}
+      <tr>
+       <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ activity.activity_name }}</td>
+        <td style="color: #3EB2EF"><a href="{{ activity.activity_url }}">{{ activity.activity_url }}</a></td>
+
+      </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+            </div>
+

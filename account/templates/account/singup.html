@@ -1,0 +1,145 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+
+	</title>
+ <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">  <!-- Font awesome CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
+     <link rel="stylesheet" href="{% static 'singup.css' %}">
+
+</head>
+<body>
+
+
+	<div class="register">
+                <div class="row">
+                    <div class="col-md-3 register-left">
+                        <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                        <h3>Welcome</h3>
+                        <p>The entire team of our students is thrilled to welcome you . We hope you’ll share your knowledge wit us </p>
+                        <input type="submit" name="" value="Login"/><br/>
+                    </div>
+                    <div class="col-md-9 register-right">
+                        <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="{% url 'home:home' %}" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="{% url 'account:login' %}" role="tab" aria-controls="profile" aria-selected="false">Login</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <h3 class="register-heading">Apply as a Student/Employee</h3>
+
+                                <form class="form-signin" method="post">
+                                    {% csrf_token %}
+
+                                <div class="row register-form">
+
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            {{ registration_form.first_name|as_crispy_field }}
+                                            {% if registration_form.first_name.error %}
+                                                <p style="color: red">{{ registration_form.first_name.error }}</p>
+                                            {% endif %}
+                                        </div>
+
+                                           <div class="form-group">
+                                               {{ registration_form.email|as_crispy_field }}
+                                            {% if registration_form.email.error %}
+                                                <p style="color: red">{{ registration_form.email.error }}</p>
+                                            {% endif %}
+                                        </div>
+
+                                         <div class="form-group">
+                                              <div class="form-group">
+                                                   {{ registration_form.username|as_crispy_field }}
+                                                {% if registration_form.username.error %}
+                                                    <p style="color: red">{{ registration_form.username.error }}</p>
+                                                {% endif %}
+                                              </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                               <div class="form-group">
+                                                   {{ registration_form.password1|as_crispy_field }}
+                                                {% if registration_form.password1.error %}
+                                                    <p style="color: red">{{ registration_form.password1.error }}</p>
+                                                {% endif %}
+                                              </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                           <div class="form-group">
+                                                   {{ registration_form.password2|as_crispy_field }}
+                                                {% if registration_form.password2.error %}
+                                                    <p style="color: red">{{ registration_form.password2.error }}</p>
+                                                {% endif %}
+                                              </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            {{ registration_form.last_name|as_crispy_field }}
+                                            {% if registration_form.last_name.error %}
+                                                <p style="color: red">{{ registration_form.last_name.error }}</p>
+                                            {% endif %}
+                                        </div>
+
+
+                                        <div class="form-group">
+                                           {{ registration_form.contact|as_crispy_field }}
+                                            {% if registration_form.contact.error %}
+                                                <p style="color: red">{{ registration_form.contact.error }}</p>
+                                            {% endif %}
+                                        </div>
+
+
+{#                                        	{% for field in registration_form %}#}
+{#                                            <p>#}
+{#                                            {% for error in field.errors %}#}
+{#                                            <p style="color: red">{{ error }}</p>#}
+{#                                            {% endfor %}#}
+{#                                            </p>#}
+{#                                            {% endfor %}#}
+
+
+                                            {% if registration_form.non_field_errors %}
+                                                <div style="color: red">
+                                                    <p>{{registration_form.non_field_errors}}</p>
+                                                </div>
+                                            {% endif %}
+
+                                      <button class="btnRegister" type="submit">Register</button>
+
+                                    </div>
+
+                                </div>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+</body>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</html>

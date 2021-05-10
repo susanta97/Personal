@@ -1,0 +1,106 @@
+{% extends 'base-edit.html' %}
+{% load crispy_forms_tags %}
+
+{% block extracss %}
+    <style type="text/css">
+
+    #id_city{
+        font-weight: bold;
+
+    }
+
+    </style>
+{% endblock extracss %}
+
+{% block edit_content %}
+    <div class="row">
+    <div class="col-md-8">
+        <h3 class="font-weight-bold sideline">Contact</h3>
+	<p>If you would like to get in touch with me feel free to full out this contact form. I ussualy
+	reply within 2-5 business days. Thanks!</p>
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="col-md-12">
+    <form method="post" id="addressform" data-cities-url="{% url 'user-profile:ajax_load_cities' %}">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-8">
+                 {{ form.email|as_crispy_field }}
+            </div>
+            </div>
+
+         <div class="row">
+            <div class="col-md-4">
+                 {{ form.contact|as_crispy_field }}
+            </div>
+              <div class="col-md-4">
+                 {{ form.website|as_crispy_field }}
+            </div>
+         </div>
+
+         <div class="row">
+            <div class="col-md-4">
+                 {{ form.country|as_crispy_field }}
+            </div>
+              <div class="col-md-4">
+                 {{ form.city|as_crispy_field }}
+            </div>
+         </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {{ form.postal_code|as_crispy_field }}
+            </div>
+
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+        </div>
+    </form>
+     </div>
+    </div>
+
+{% endblock edit_content %}
+
+{% block edit_javascripts %}
+
+ <script>
+
+   $('#id_city').prop('disabled', true);
+
+    $("#id_country").change(function () {
+      var url = $("#addressform").attr("data-cities-url");
+      var countryId = $(this).val();
+
+      $.ajax({
+        url: url,
+        data: {
+          'country': countryId
+        },
+        success: function (data) {
+
+            console.log(data)
+          $("#id_city").html(data);
+        },
+        complete:function () {
+        $('#id_city').prop('disabled', false)
+        }
+      });
+
+    });
+
+    $('#addressform').submit(function () {
+
+         $('#id_city').prop('disabled', false)
+
+    })
+  </script>
+
+{% endblock edit_javascripts %}

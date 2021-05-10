@@ -1,0 +1,187 @@
+{% extends 'base-edit.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block extracss %}
+<style rel="stylesheet">
+@media print {
+  .row{
+    display:block;
+      height: auto;
+      width: 100%;
+      margin: auto;
+  }
+}
+
+</style>
+
+{% endblock extracss %}
+
+{% block edit_content %}
+{##}
+                 <div class="row">
+                            <h5 style="margin-right: 10px">Name:</h5> <h5>{{ profile.First_name}} {{ profile.Last_name }}</h5>
+                    </div>
+                 <div class="row">
+                            <h5 style="margin-right: 10px">Email:</h5> <h5>{{ profile.email}}</h5>
+                 </div>
+                 <div class="row">
+                            <h6 style="margin-right: 10px">Contact:</h6> <h6>{{ profile.contact}}</h6>
+                 </div>
+
+        <div class="row">
+
+        <form method="post" novalidate enctype="multipart/form-data">
+             {% csrf_token %}
+                <div class="row justify-content-md-center" >
+
+
+
+
+
+
+                     <table class="table table-striped"  style="display:inline">
+                            {{ profile_education.management_form }}
+                                    {% for form in profile_education %}
+
+                                            {% if forloop.first %}
+
+                                        <thead>
+                                                <tr >
+                                                    {% for field in form.visible_fields %}
+                                                        <th>{{ field.label|capfirst }}</th>
+                                                    {% endfor %}
+                                                </tr>
+                                        </thead>
+                                              {% endif %}
+                                             <tr style="height: 1px" class="{% cycle row1 row2  %} formset_row">
+                                              {% for field in form.visible_fields %}
+
+                                               <td >
+                                {# Include the hidden fields in the form #}
+
+                                                    {% if forloop.first %}
+                                                        {% for hidden in form.hidden_fields %}
+                                                            {{ hidden }}
+                                                        {% endfor %}
+                                                    {% endif %}
+{#                                                    {{ field.errors.as_ul }}#}
+{#                                               {{ field }}#}
+{#                                               {{ field.field.widget.input_type }}#}
+
+
+                                               {% ifnotequal field.field.widget.input_type  "file" %}
+                                                   {{ field }}
+
+                                                   {% if field.errors %}
+                                                      <div style="color: red">{{ form.errors }}</div>
+                                                   {% endif %}
+
+                                               {% endifnotequal %}
+
+                                               {% ifequal field.field.widget.input_type  "file" %}
+
+{#                                                      <button type="button" class="btn btn-primary js-upload-photos">#}
+{#                                                        <span class="fas fa-upload"></span>#}
+{#                                                      </button>#}
+                                                    {% ifequal field.initial 'none' %}
+                                                           <div class="row" style="float: right; padding: 10px ;position: center">
+                                                           <label style="cursor: pointer ;margin-right: 5px" for="{{ field.id_for_label }}"><span class="fas fa-upload"></span></label>
+                                                        </div>
+
+                                                    {% else %}
+
+                                                    {% ifnotequal field.initial None  %}
+
+                                                             <div class="row" style="float: right; padding: 8px">
+                                                                 <label style="cursor: pointer ;margin-right: 5px" for="{{ field.id_for_label }}"><span class="fas fa-upload"></span></label>
+                                                                  <a href="/media/{{ field.initial }}"><span class="fas fa-download"></span></a>
+                                                            </div>
+
+                                                    {% else %}
+                                                       
+                                                        <div class="row" style="float: right; padding: 10px ;position: center">
+                                                        <label style="cursor: pointer ;margin-right: 5px" for="{{ field.id_for_label }}"><span class="fas fa-upload"></span></label>
+                                                        </div>
+
+                                                    {% endifnotequal %}
+                                                    {% endifequal %}
+
+                                                   <div style="width: 2px">
+                                                   {{ field }}
+                                                   </div>
+
+                                               {% endifequal %}
+
+                                               {% ifequal field.field.widget.input_type 'checkbox' %}
+                                                 <div class="row" style="position: center;margin-top: 10px">
+                                                     {{ field }}
+                                                 </div>
+                                               {% endifequal %}
+
+{#                                               {{ field.field.widget.input_type }}#}
+                                                    {% if field.help_text %}
+                                                        <p style="color: grey">{{ field.help_text }}</p>
+                                               {% endif %}
+
+                                               </td>
+
+                                              {% endfor %}
+                                              </tr>
+                                    {% endfor %}
+                     </table>
+                    </div>
+
+
+
+
+                <div class="row">
+                     <button type="submit" class="btn btn-success" style="margin-left: 0.5%">Save</button>
+                </div>
+        </form>
+
+        </div>
+{% endblock edit_content %}
+
+
+{% block edit_javascripts %}
+
+<script>
+var x = document.getElementsByClassName("example");
+console.log(x)
+</script>
+
+    <script type="text/javascript">
+      $(".js-upload-photos").click(function () {
+          var x = document.getElementsByClassName("fileupload");
+
+      $(".fileupload").click();
+  });
+
+    </script>
+
+
+
+   <script src="{% static 'formset/jquery.formset.js' %}"></script>
+    <script type="text/javascript">
+        $('.formset_row').formset({
+            addText: 'Add',
+            deleteText: 'remove',
+            prefix: 'my_edu'
+        });
+    </script>
+
+
+
+
+    <script type="text/javascript">
+    $(".example").change(function () {
+        var value=$(this).val();
+
+    })
+    </script>
+
+
+
+{% endblock edit_javascripts %}

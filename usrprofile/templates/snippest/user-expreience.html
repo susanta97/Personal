@@ -1,0 +1,64 @@
+             <div class="card">
+
+					<h3 class="font-weight-bold sideline mb-3">Skills</h3>
+
+					<div class="timeline">
+                        <div class="row">
+
+                      {% for skill in skills %}
+                          <div class="job row">
+							<div class="col-12 col-sm-12 col-md-12 col-lg-3 job-date blue">
+								<i class="far fa-calendar-alt mr-2"></i>{{ skill.session }}
+							</div>
+							<div class="col-12 col-md-12 col-lg-9 job-description">
+								<h6 class="font-weight-bold">{{ skill.skill_name }}</h6>
+								<h6 class="blue">{{ skill.skill_dependency }}</h6>
+{#								<p>{% autoescape off %}{{ skill.skill_text }} {% endautoescape %}</p>#}
+                                <p>{{ skill.skill_text }}</p>
+
+							</div>
+						</div>
+                      {% endfor %}
+
+					</div>
+                    </div>
+                 <h3 class="font-weight-bold sideline mb-3">Experience</h3>
+
+                     <div class="row">
+                     <table class="table">
+                           <thead>
+                                <tr>
+                                      <th scope="col">#</th>
+                                      <th scope="col">YEAT EXPREIENCE</th>
+                                      <th scope="col">JOB ROLE</th>
+                                      <th scope="col">NAME OF THE COMPANY</th>
+                                </tr>
+                           </thead>
+                     <tbody>
+                         {% for exp in expreience %}
+                          <tr>
+                              <th scope="row">{{ forloop.counter }}</th>
+                                <td style="color: #3EB2EF">
+								<i class="far fa-calendar-alt mr-2" style="color: blue"></i>{{ exp.expreience }}
+							     </td>
+                                 <td>
+	                              <h6 class="font-weight-bold">{{ exp.job_title }}</h6>
+                                  </td>
+                                  <td>
+			                      <h6 class="blue">{{ exp.company_name }}</h6>
+                                  </td>
+                          </tr>
+                         {% endfor %}
+                      </tbody>
+                     </table>
+
+                     </div>
+
+                 </div>
+                 
+
+
+
+
+
+

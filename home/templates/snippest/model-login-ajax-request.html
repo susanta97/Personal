@@ -1,0 +1,40 @@
+<script>
+           $("#login-form").submit(function (e) {
+            // preventing from page reload and default actions
+            e.preventDefault();
+            // serialize the data for sending the form data.
+
+               payload = {
+                     "csrfmiddlewaretoken": "{{ csrf_token }}",
+                     "username": $("#username").val(),
+                     "password":$("#password").val()
+		            }
+               console.log(payload)
+            var serializedData = $(this).serialize();
+            console.log(serializedData)
+            // make POST ajax call
+            $.ajax({
+                type: 'POST',
+                dataType: "json",
+                url: "{% url 'home:model_login' %}",
+                timeout: 5000,
+			    data: payload,
+                success: function(data) {
+				console.log("SUCCESS-----------")
+				if(data['response'] == "login successfull"){
+					// ui is updated
+				}
+				else if(data['response'] != null){
+					alert(data['response'])
+				}
+			},
+			error: function(data) {
+				console.error("ERROR...", data)
+				alert("Something went wrong.")
+			},
+			complete: function(data){
+				location.reload();
+			}
+            })
+        })
+</script>
